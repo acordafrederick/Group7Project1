@@ -71,7 +71,7 @@ function searchBandsInTown(artist) {
       // Constructing HTML containing the artist information
       var artistName = $("<h1>").text(response.name);
       var artistURL = $("<a>").attr("href", response.url).append(artistName);
-      var artistImage = $("<img>").attr("src", response.thumb_url);
+      var artistImage = $("<img>").attr("src", response.thumb_url).addClass("img-thumbnail").addClass({"height": "150px", "width": "150px"});
       var trackerCount = $("<h2>").text(response.tracker_count + " fans tracking this artist");
       var upcomingEvents = $("<h2>").text(response.upcoming_event_count + " upcoming events");
       var goToArtist = $("<a>").attr("href", response.url).text("See Tour Dates");
@@ -83,7 +83,7 @@ function searchBandsInTown(artist) {
   }
   // On input to search of artist, queries possible artists
   $("#artist-input").keyup(function(event) {
-
+    $("#artistSearch").show({"transition": "0.5"});
     // Preventing the button from trying to submit the form
 
     // Storing the artist name
@@ -93,8 +93,11 @@ function searchBandsInTown(artist) {
       event.preventDefault();
       $("#select-artist").click();
       };
-
+      
     searchBandsInTown(inputArtist);
+    $("#hideArtist").on("click", function() {
+      $("#searchArtist").hide({"transition": "0.5"});
+    })
   });
 
   $(".artist-click").on("click", function(){
